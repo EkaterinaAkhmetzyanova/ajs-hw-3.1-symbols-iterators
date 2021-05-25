@@ -26,15 +26,13 @@ export default class Team {
 
   [Symbol.iterator]() {
     let currentTeam = 0;
-    const teamSize = this.members.size;
-    const teamIterators = this.members.values();
+    const teamIterators = [...this.members.values()];
     return {
       next() {
-        if (currentTeam <= teamSize) {
-          currentTeam++;
+        if (currentTeam < teamIterators.length) {
           return {
             done: false,
-            value: teamIterators.next().value,
+            value: teamIterators[currentTeam++],
           };
         }
         return {
